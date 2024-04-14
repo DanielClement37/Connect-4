@@ -1,17 +1,4 @@
 @media screen and (max-width: 480px) {
-    body {
-        max-width: 100%;
-        width: 100%;
-        height: 100vh;
-    }
-    
-    #root{
-        background-color: var(--purple);
-        max-width: 100%;
-        width: 100%;
-        height: 100%;
-    }
-    
     .menu-page {
         max-width: 100%;
         width: 100%;
@@ -20,6 +7,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: var(--purple);
     }
     
     .menu-card{
