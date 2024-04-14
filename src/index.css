@@ -56,14 +56,7 @@ body {
 	line-height: var(--font-line-body);
 	font-family: "Space Grotesk", sans-serif;
 	font-weight: 500;
-	background-color: var(--color-purple);
-	color: var(--color-black);
-
 	position: relative;
-}
-
-#root {
-	height: 100%;
 }
 
 h1,

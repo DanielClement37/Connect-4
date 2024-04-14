@@ -9,11 +9,11 @@ export const MainMenu = () => {
 			<div className="menu-card">
 				<img src={GameLogo} alt="game logo" />
 				<Link to={`Game`} className="pvp menu-btn link">
-					<h2 className="heaing-m">PLAY VS PLAYER</h2>
+					<h3 className="heaing-m">PLAY VS PLAYER</h3>
 					<img src={PvpImg} alt="two faces" />
 				</Link>
 				<Link to={`Rules`} className="rules menu-btn link">
-					<h2 className="heaing-m">GAME RULES</h2>
+					<h3 className="heaing-m">GAME RULES</h3>
 				</Link>
 			</div>
 		</div>
