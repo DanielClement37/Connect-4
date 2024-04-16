@@ -5,6 +5,7 @@ import { GameInfo } from "../Components/GameInfo";
 import "../Styles/gameStyles/gamePageDesk.css";
 import { InitGameState } from "../Helpers/GameMethods";
 import { useState } from "react";
+import { Player } from "../Types/Enums";
 
 export const Game = () => {
 	const [gameState, setGameState] = useState(InitGameState());
@@ -25,12 +26,13 @@ export const Game = () => {
 				</button>
 			</div>
 			<div className="game-body">
-				<PlayerInfo />
+				<PlayerInfo playerColor={Player.RED} />
 				<GameBoard />
-				<PlayerInfo />
+				<PlayerInfo playerColor={Player.YELLOW} />
+			</div>
+			<div className="game-footer">
 				<GameInfo />
 			</div>
-			<div className="game-footer"></div>
 		</div>
 	);
 };
