@@ -1,0 +1,40 @@
+.game-page {
+	--game-width-desk: 632px;
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	padding: 2.7rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+	background-color: var(--purple);
+}
+
+.game-header {
+	width: var(--game-width-desk);
+	padding-top: 53px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.game-header-btn {
+	color: var(--white);
+	font-size: var(--font-size-body);
+	background-color: var(--dark-purple);
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    border-radius: 20px;
+    border: 0;
+    height: 39px;
+}
+
+.game-menu{
+    width: 86px;
+}
+
+.game-restart{
+    width: 108px;
+}
