@@ -27,7 +27,7 @@ export const Game = () => {
 			</div>
 			<div className="game-body">
 				<PlayerInfo playerColor={Player.RED} />
-				<GameBoard />
+				<GameBoard gameBoard={gameState.boardState}/>
 				<PlayerInfo playerColor={Player.YELLOW} />
 			</div>
 			<div className="game-footer">

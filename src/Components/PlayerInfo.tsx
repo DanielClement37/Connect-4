@@ -15,7 +15,7 @@ export const PlayerInfo = ({ playerColor }: PlayerInfoProps) => {
 				</div>
 				<div className="info-container">
 					<h4 className="heading-s">PLAYER {playerColor}</h4>
-					<h2 className="heading-l">0</h2>
+					<h1 className="heading-l">0</h1>
 				</div>
 			</div>
 		</div>

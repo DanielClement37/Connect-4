@@ -12,17 +12,17 @@ export const InitGameState = (): GameState => {
 
 export const ResetBoard = (): Cell[][] => {
     const board: Cell[][] = [];
-    for (let row = 0; row < 6; row++) {
-        const rowCells: Cell[] = [];
-        for (let col = 0; col < 7; col++) {
+    for (let col = 0; col < 7; col++) {
+        const boardCol: Cell[] = [];
+        for (let row = 0; row < 6; row++) {
             const cell: Cell = {
-                row,
                 col,
+                row,
                 color: CellColor.NONE
             };
-            rowCells.push(cell);
+            boardCol.push(cell);
         }
-        board.push(rowCells);
+        board.push(boardCol);
     }
     return board;
 };

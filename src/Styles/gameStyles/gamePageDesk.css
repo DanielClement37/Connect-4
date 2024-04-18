@@ -1,3 +1,7 @@
+.relative{
+	position: relative;
+}
+
 .game-page {
 	max-width: 100%;
 	width: 100%;
@@ -15,7 +19,7 @@
 	padding-top: 53px;
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-between;
 }
 
 .game-header-btn {
@@ -34,12 +38,17 @@
     width: 86px;
 }
 
+.logo{
+	padding-left: 22px;
+}
+
 .game-restart{
     width: 108px;
 }
 
 .game-body{
 	width: 1034px;
+	padding-top: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

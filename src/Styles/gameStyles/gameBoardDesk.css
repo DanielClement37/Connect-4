@@ -1,0 +1,48 @@
+.board-container {
+	width: 632px;
+	height: 594px;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+
+.board-container::before,
+.board-container::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	bottom: 0px;
+	background-repeat: no-repeat;
+}
+
+.board-container::before {
+	background-image: url("../../assets/images/board-layer-black-large.svg");
+}
+
+.board-container::after {
+	background-image: url("../../assets/images/board-layer-white-large.svg");
+	bottom: 10px;
+	pointer-events: none;
+}
+
+.board-grid {
+	width: 100%;
+	display: flex;
+	padding-inline: 1.4%;
+	height: 100%;
+}
+
+.board-col {
+	position: relative;
+	flex: 1;
+	padding-top: 1.7%;
+}
+
+.board-cell {
+	position: relative;
+	height: 15.1%;
+	margin-inline: auto;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
