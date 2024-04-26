@@ -19,10 +19,10 @@ export const Game = () => {
 	return (
 		<div className="game-page">
 			<div className="game-header">
-				<button className="game-header-btn game-menu">Menu</button>
+				<button className="header-btn">MENU</button>
 				<img src={GameLogo} alt="game logo" className="logo" />
-				<button onClick={() => handleRestart()} className="game-header-btn game-restart">
-					Restart
+				<button onClick={() => handleRestart()} className="header-btn">
+					RESTART
 				</button>
 			</div>
 			<div className="game-body">

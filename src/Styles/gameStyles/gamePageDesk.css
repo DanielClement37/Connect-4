@@ -22,9 +22,10 @@
 	justify-content: space-between;
 }
 
-.game-header-btn {
+.header-btn {
 	color: var(--white);
 	font-size: var(--font-size-body);
+	font-weight: 600;
 	background-color: var(--dark-purple);
 	text-align: center;
 	text-decoration: none;
@@ -32,18 +33,10 @@
     border-radius: 20px;
     border: 0;
     height: 39px;
+	width: 108px;
 }
-
-.game-menu{
-    width: 86px;
-}
-
 .logo{
 	padding-left: 22px;
-}
-
-.game-restart{
-    width: 108px;
 }
 
 .game-body{

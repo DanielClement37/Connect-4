@@ -7,7 +7,6 @@ export interface GameBoardProps {
 
 export const GameBoard = ({ gameBoard }: GameBoardProps) => {
 	return (
-		<div className="relative">
 			<div className="board-container">
 				<div className="board-grid">
 					{gameBoard.map((col, colIndex) => (
@@ -19,6 +18,5 @@ export const GameBoard = ({ gameBoard }: GameBoardProps) => {
 					))}
 				</div>
 			</div>
-		</div>
 	);
 };
