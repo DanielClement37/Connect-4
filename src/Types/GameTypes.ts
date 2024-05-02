@@ -1,4 +1,4 @@
-import { CellColor, Player } from "./Enums";
+import { CellColor, Player, RunningState } from "./Enums";
 
 export interface Cell{
     row: number,
@@ -11,4 +11,5 @@ export interface GameState{
     currPlayer: Player
     turnCount: number
     playerScores: number[]
+    runningState: RunningState
 }

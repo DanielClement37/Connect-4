@@ -1,4 +1,4 @@
-import { CellColor, Player } from "../Types/Enums";
+import { CellColor, Player, RunningState } from "../Types/Enums";
 import { GameState, Cell } from "../Types/GameTypes";
 
 export const InitGameState = (): GameState => {
@@ -6,7 +6,8 @@ export const InitGameState = (): GameState => {
         boardState: ResetBoard(),
         currPlayer: Player.RED,
         turnCount: 1,
-        playerScores: [0,0]
+        playerScores: [0,0],
+        runningState: RunningState.PREGAME
     };
 };
 

@@ -6,20 +6,33 @@ import "../Styles/gameStyles/gamePageDesk.css";
 import { InitGameState } from "../Helpers/GameMethods";
 import { useState } from "react";
 import { Player } from "../Types/Enums";
+import { PauseModal } from "../Components/PauseModal";
 
 export const Game = () => {
 	const [gameState, setGameState] = useState(InitGameState());
+	const [isPaused, setIsPaused] = useState(false);
 
 	const handleRestart = () => {
 		setGameState(InitGameState());
-
+		setIsPaused(false);
 		console.log(gameState);
 	};
 
+	const handlePause = () =>{
+		setIsPaused(true);
+		//TODO when gamestate is in a react context dispatch runningState to PAUSED
+	}
+
+	const handleResume = () => {
+		setIsPaused(false);
+		//TODO when gamestate is in a react context dispatch runningState to RUNNING
+	}
+
 	return (
 		<div className="game-page">
+			{isPaused && <PauseModal resume={()=> handleResume()} restart={() => handleRestart()}/>}
 			<div className="game-header">
-				<button className="header-btn">MENU</button>
+				<button onClick={()=> handlePause()} className="header-btn">MENU</button>
 				<img src={GameLogo} alt="game logo" className="logo" />
 				<button onClick={() => handleRestart()} className="header-btn">
 					RESTART
@@ -30,9 +43,8 @@ export const Game = () => {
 				<GameBoard gameBoard={gameState.boardState}/>
 				<PlayerInfo playerColor={Player.YELLOW} />
 			</div>
-			<div className="game-footer">
-				<GameInfo />
-			</div>
+			<GameInfo />
+			<div className="game-footer" />
 		</div>
 	);
 };

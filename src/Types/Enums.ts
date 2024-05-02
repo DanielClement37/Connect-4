@@ -8,3 +8,11 @@ export enum CellColor {
     RED,
     YELLOW,
 }
+
+export enum RunningState{
+    RUNNING,
+    PAUSED,
+    PREGAME,
+    PLAYER_ONE_WINS,
+    PLAYER_TWO_WINS
+}

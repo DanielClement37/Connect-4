@@ -35,6 +35,14 @@
     height: 39px;
 	width: 108px;
 }
+
+.header-btn:hover{
+	background-color: var(--red);
+	transition: 200ms;
+	cursor: pointer;
+}
+
+
 .logo{
 	padding-left: 22px;
 }
