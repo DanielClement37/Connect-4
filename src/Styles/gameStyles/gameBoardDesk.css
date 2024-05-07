@@ -47,3 +47,13 @@
 	background-position: center;
 	cursor: pointer;
 }
+
+.game-footer{
+	position: absolute;
+  top: 0;
+  left: calc((100vw - 100%) / -2);
+  width: 100vw;
+  bottom: -40vh;
+  border-radius: 60px 60px 0 0;
+  background-color: var(--dark-purple);
+}

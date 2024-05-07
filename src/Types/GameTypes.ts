@@ -11,4 +11,5 @@ export interface GameState{
     currPlayer: Player
     turnCount: number
     playerScores: number[]
+    gameWinner?: Player
 }

@@ -1,7 +1,7 @@
 import GameLogo from "../assets/images/logo.svg";
 import { PlayerInfo } from "../Components/PlayerInfo";
 import { GameBoard } from "../Components/GameBoard";
-import { GameInfo } from "../Components/GameInfo";
+import { GameStatus } from "../Components/GameStatus";
 import "../Styles/gameStyles/gamePageDesk.css";
 import { InitGameState } from "../Helpers/GameMethods";
 import { useContext } from "react";
@@ -9,11 +9,12 @@ import { AppContext } from "../GlobalState/Context/AppContext";
 import { Player, RunningState } from "../Types/Enums";
 import { PauseModal } from "../Components/PauseModal";
 import {PAUSE, SET_MATCH_STATE} from "../GlobalState/Actions/actiontypes";
+import { classNames } from "../Utils/ClassNames";
 
 
 export const Game = () => {
 	const { state, dispatch } = useContext(AppContext);
-	const {boardState} = state.gameState
+	const {gameState} = state
 
 	const handleRestart = () => {
 		dispatch({type: SET_MATCH_STATE, payload:InitGameState()});
@@ -40,11 +41,11 @@ export const Game = () => {
 			</div>
 			<div className="game-body">
 				<PlayerInfo playerColor={Player.RED} />
-				<GameBoard gameBoard={boardState}/>
+				<GameBoard gameBoard={gameState.boardState}/>
 				<PlayerInfo playerColor={Player.YELLOW} />
 			</div>
-			<GameInfo />
-			<div className="game-footer" />
+			<GameStatus />
+			<div className={classNames("footer",  gameState.gameWinner === Player.RED ? "red"  :  gameState.gameWinner === Player.YELLOW ? "yellow" : "dark-purple")}/>
 		</div>
 	);
 };

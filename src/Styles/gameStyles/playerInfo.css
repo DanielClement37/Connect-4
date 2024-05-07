@@ -16,21 +16,21 @@
     align-items: center;
 }
 
-.img-container{
+.player-img-container{
     position: relative;
 }
 
-.img{
+.player-img{
     position: absolute;
     width: 54px;
     height: 59px;
 }
 
-.red-img{
+.red-player-img{
     background-image: url("../../assets/images/player-one.svg");
 }
 
-.yellow-img{
+.yellow-player-img{
     background-image: url("../../assets/images/player-two.svg");
 }
 

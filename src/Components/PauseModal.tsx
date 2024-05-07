@@ -15,7 +15,7 @@ export const PauseModal = ({resume, restart}: PauseProps) => {
           <h1>PAUSE</h1>
           <div onClick={()=> resume()} className="pause-btn">CONTINUE GAME</div>
           <div onClick={()=> restart()} className="pause-btn">RESTART</div>
-          <Link  to={`/`} className="pause-btn quit">QUIT GAME</Link>
+          <Link onClick={()=> restart()} to={`/`} className="pause-btn quit">QUIT GAME</Link>
         </div>
       </div>
     </div>

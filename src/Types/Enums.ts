@@ -13,6 +13,5 @@ export enum RunningState{
     RUNNING,
     PAUSED,
     PREGAME,
-    PLAYER_ONE_WINS,
-    PLAYER_TWO_WINS
+    GAME_OVER
 }

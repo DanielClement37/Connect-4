@@ -1,0 +1,39 @@
+.status-container {
+    position: relative;
+    width: 285px;
+    height:165px;
+    z-index: +1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 35px;
+}
+
+.status-img-container {
+    position: absolute;
+    width: 197px;
+    height: 165px;
+}
+
+.red-status-img {
+    background-image: url("../../assets/images/turn-background-red.svg");
+}
+
+.yellow-status-img {
+    background-image: url("../../assets/images/turn-background-yellow.svg");
+}
+
+.status-content-container{
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: +1;
+    gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.heading-xs{
+    font-size: 16px;
+}

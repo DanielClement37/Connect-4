@@ -6,7 +6,8 @@ export const InitGameState = (): GameState => {
         boardState: ResetBoard(),
         currPlayer: Player.RED,
         turnCount: 1,
-        playerScores: [0,0]
+        playerScores: [0,0],
+        gameWinner: undefined
     };
 };
 
