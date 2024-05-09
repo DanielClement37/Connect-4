@@ -3,18 +3,29 @@ import { PlayerInfo } from "../Components/PlayerInfo";
 import { GameBoard } from "../Components/GameBoard";
 import { GameStatus } from "../Components/GameStatus";
 import "../Styles/gameStyles/gamePageDesk.css";
-import { InitGameState } from "../Helpers/GameMethods";
-import { useContext } from "react";
+import { getPossibleMoves, InitGameState } from "../Helpers/GameMethods";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { Player, RunningState } from "../Types/Enums";
 import { PauseModal } from "../Components/PauseModal";
-import {PAUSE, SET_MATCH_STATE} from "../GlobalState/Actions/actiontypes";
+import {GET_MOVES, PAUSE, SET_MATCH_STATE} from "../GlobalState/Actions/actiontypes";
 import { classNames } from "../Utils/ClassNames";
 
 
 export const Game = () => {
 	const { state, dispatch } = useContext(AppContext);
 	const {gameState} = state
+
+	useEffect(() => {
+		//get legal moves then convert to move objects
+		const moves = getPossibleMoves(gameState.boardState);
+
+		dispatch({
+			type: GET_MOVES,
+			payload: moves,
+		});
+
+	}, [dispatch, gameState.boardState]);
 
 	const handleRestart = () => {
 		dispatch({type: SET_MATCH_STATE, payload:InitGameState()});
@@ -41,7 +52,7 @@ export const Game = () => {
 			</div>
 			<div className="game-body">
 				<PlayerInfo playerColor={Player.RED} />
-				<GameBoard gameBoard={gameState.boardState}/>
+				<GameBoard/>
 				<PlayerInfo playerColor={Player.YELLOW} />
 			</div>
 			<GameStatus />

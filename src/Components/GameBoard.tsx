@@ -4,20 +4,47 @@ import "../Styles/gameStyles/gameBoardDesk.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { classNames } from "../Utils/ClassNames";
-import { Player } from "../Types/Enums";
+import { CellColor, Player } from "../Types/Enums";
+import { MAKE_MOVE } from "../GlobalState/Actions/actiontypes";
 
-export interface GameBoardProps {
-	gameBoard: Cell[][];
-}
 
-export const GameBoard = ({ gameBoard }: GameBoardProps) => {
+
+export const GameBoard = () => {
 	const { state, dispatch } = useContext(AppContext);
-	const {gameState} = state
+	const {gameState, moveList} = state
 	
 	const [hoveredCol, setHoveredCol] = useState<number>(0);
 	const columnWidth = 632 / 7; // Calculate the width of each column
 	const markerWidth = 38; // The width of the marker
     const adjustment = (columnWidth - markerWidth) / 2;
+
+	const handleMove = (colIndex: number) => {
+		// Find if the move is within the possible moves
+        const validMove = moveList.find(move => move.col === colIndex && move.color === CellColor.NONE);
+		console.log(moveList);
+
+        if (validMove) {
+            const newBoardState = gameState.boardState.map(col => col.slice()); // Clone the board state
+        
+            if (newBoardState[colIndex][validMove.row].color === CellColor.NONE) {
+                newBoardState[colIndex][validMove.row].color = gameState.currPlayer as unknown as CellColor; // Set the player's color
+                // Update game state after the move
+                const newTurnCount = gameState.turnCount + 1;
+                const newCurrPlayer = gameState.currPlayer === Player.RED ? Player.YELLOW : Player.RED;
+                
+                dispatch({ 
+                    type: MAKE_MOVE,
+                    payload: {
+                        boardState: newBoardState,
+                        currPlayer: newCurrPlayer,
+                        turnCount: newTurnCount,
+                        playerScores: gameState.playerScores,
+                        gameWinner: gameState.gameWinner,
+                    }
+                });
+            }
+        }
+	};
 
 	return (
 		<div className="board-container">
@@ -32,10 +59,10 @@ export const GameBoard = ({ gameBoard }: GameBoardProps) => {
 				/>
 			</div>
 			<div className="board-grid">
-				{gameBoard.map((col, colIndex) => (
-					<div key={colIndex} className="board-col" onMouseEnter={() => {setHoveredCol(colIndex); console.log(colIndex)}}>
+				{gameState.boardState.map((col, colIndex) => (
+					<div key={colIndex} className="board-col" onClick={()=> handleMove(colIndex)} onMouseEnter={() => {setHoveredCol(colIndex);}}>
 						{col.map((cell, rowIndex) => (
-							<div key={rowIndex} className="board-cell"></div>
+							<div key={rowIndex} className={classNames("board-cell", cell.color === CellColor.RED ? "red-cell" : cell.color === CellColor.YELLOW ? "yellow-cell" : "")} />
 						))}
 					</div>
 				))}

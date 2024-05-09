@@ -49,7 +49,7 @@
 .board-grid {
 	position: relative;
 	top: -36px;
-	width: 632px;
+	width: 633px;
 	height: 584px;
 	display: flex;
 	padding-inline: 1.4%;
@@ -59,16 +59,30 @@
 	position: relative;
 	flex: 1;
 	padding-top: 1.7%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: .15rem;
 }
 
 .board-cell {
 	position: relative;
 	height: 15.1%;
+	width: 100%;
 	margin-inline: auto;
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
 }
+
+.red-cell{
+	background-image: url("../../assets/images/counter-red-large.svg");
+}
+
+.yellow-cell{
+	background-image: url("../../assets/images/counter-yellow-large.svg");
+}
+
 
 .game-footer {
 	position: absolute;
