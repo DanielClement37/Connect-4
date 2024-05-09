@@ -83,6 +83,17 @@
 	background-image: url("../../assets/images/counter-yellow-large.svg");
 }
 
+.hovered-red{
+	background-image: url("../../assets/images/counter-red-large.svg");
+	opacity: 0.6;
+	transition: left 0.1s ease,
+}
+
+.hovered-yellow{
+	background-image: url("../../assets/images/counter-yellow-large.svg");
+	opacity: 0.6;
+	transition: left 0.1s ease,
+}
 
 .game-footer {
 	position: absolute;

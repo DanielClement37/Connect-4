@@ -19,7 +19,8 @@ export const ResetBoard = (): Cell[][] => {
             const cell: Cell = {
                 col,
                 row,
-                color: CellColor.NONE
+                color: CellColor.NONE,
+                isHovered: false
             };
             boardCol.push(cell);
         }
@@ -33,7 +34,7 @@ export const getPossibleMoves = (boardState: Cell[][]): Cell[] => {
     for (let col = 0; col < 7; col++) {
         for (let row = 5; row >= 0; row--) {
             if (boardState[col][row].color === CellColor.NONE) {
-                moves.push({ row, col, color: CellColor.NONE });
+                moves.push({ row, col, color: CellColor.NONE , isHovered: false});
                 break; // Stop after finding the first empty cell in this column
             }
         }

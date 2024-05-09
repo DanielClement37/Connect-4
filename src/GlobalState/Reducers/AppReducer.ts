@@ -1,7 +1,7 @@
 import { InitGameState } from "../../Helpers/GameMethods.ts";
 import { RunningState } from "../../Types/Enums.ts";
 import { Cell, GameState } from "../../Types/GameTypes";
-import { SET_MATCH_STATE, MAKE_MOVE, PAUSE, RESUME, GET_MOVES } from "../Actions/actiontypes.ts"
+import { SET_MATCH_STATE, MAKE_MOVE, PAUSE, RESUME, GET_MOVES, SET_HOVERED_COLUMN } from "../Actions/actiontypes.ts"
 
 export interface AppState {
 	gameState: GameState;
@@ -29,6 +29,8 @@ export const appReducer = (state: AppState, action: any) => {
 			return { ...state, runningState: action.payload};
 		case RESUME:
 			return { ...state, runningState: action.payload};
+		case SET_HOVERED_COLUMN:
+			return { ...state,  gameState: action.payload};
 		default:
 			return state;
 	}
