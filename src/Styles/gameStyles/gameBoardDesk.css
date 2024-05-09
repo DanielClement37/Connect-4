@@ -1,10 +1,10 @@
 .board-container {
+	position: relative;
 	width: 632px;
 	height: 594px;
 	display: grid;
 	justify-items: center;
 	align-items: center;
-	position: relative;
 }
 
 .board-container::before,
@@ -26,11 +26,33 @@
 	pointer-events: none;
 }
 
-.board-grid {
+.marker-container {
+	position: relative;
 	width: 100%;
+	height: 36px;
+	z-index: +2;
+	top: -36px;
+}
+
+.marker-red {
+	width: 38px;
+	height: 36px;
+	background-image: url("../../assets/images/marker-red.svg");
+}
+
+.marker-yellow {
+	width: 38px;
+	height: 36px;
+	background-image: url("../../assets/images/marker-yellow.svg");
+}
+
+.board-grid {
+	position: relative;
+	top: -36px;
+	width: 632px;
+	height: 584px;
 	display: flex;
 	padding-inline: 1.4%;
-	height: 100%;
 }
 
 .board-col {
@@ -48,12 +70,12 @@
 	cursor: pointer;
 }
 
-.game-footer{
+.game-footer {
 	position: absolute;
-  top: 0;
-  left: calc((100vw - 100%) / -2);
-  width: 100vw;
-  bottom: -40vh;
-  border-radius: 60px 60px 0 0;
-  background-color: var(--dark-purple);
+	top: 0;
+	left: calc((100vw - 100%) / -2);
+	width: 100vw;
+	bottom: -40vh;
+	border-radius: 60px 60px 0 0;
+	background-color: var(--dark-purple);
 }
