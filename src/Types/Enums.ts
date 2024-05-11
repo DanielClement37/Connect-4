@@ -12,6 +12,5 @@ export enum CellColor {
 export enum RunningState{
     RUNNING,
     PAUSED,
-    PREGAME,
     GAME_OVER
 }

@@ -95,6 +95,19 @@
 	transition: left 0.1s ease,
 }
 
+.winning-cell::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%; /* Adjust size based on your design */
+    height: 50%; /* Adjust size based on your design */
+    border-radius: 50%;
+    border: 10px solid white; /* Creates a hollow effect */
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+
 .game-footer {
 	position: absolute;
 	top: 0;

@@ -37,3 +37,7 @@
 .heading-xs{
     font-size: 16px;
 }
+
+.black-text{
+    color: var(--black)
+}
