@@ -5,12 +5,26 @@ import { Player, RunningState } from "../Types/Enums";
 import "../Styles/gameStyles/gameStatusDesk.css";
 import { classNames } from "../Utils/ClassNames";
 
-export const GameStatus = () => {
+export interface GameStatusProps{
+	handleRestart: ()=> void;
+}
+
+export const GameStatus = ({handleRestart}:GameStatusProps) => {
 	const { state } = useContext(AppContext);
 	const { gameState, runningState } = state;
 
 	if (runningState === RunningState.GAME_OVER) {
-		return <div>Game over</div>;
+		return (
+			<div className="game-over-container">
+				<div className="game-over-card">
+					<h4 className="heading-xs">PLAYER {gameState.gameWinner}</h4>
+					<h1 className="heading-l">WINS</h1>
+					<button className="game-over-btn" onClick={()=>handleRestart()}>
+						PLAY AGAIN
+					</button>
+				</div>
+			</div>
+		);
 	} else {
 		return (
 			<div className="status-container">

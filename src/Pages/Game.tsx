@@ -70,7 +70,7 @@ export const Game = () => {
 				<GameBoard />
 				<PlayerInfo playerColor={Player.YELLOW} />
 			</div>
-			<GameStatus />
+			<GameStatus handleRestart={()=> handleRestart()} />
 			<div className={classNames("footer", gameState.gameWinner === Player.RED ? "red" : gameState.gameWinner === Player.YELLOW && "yellow")} />
 		</div>
 	);

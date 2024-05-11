@@ -34,6 +34,50 @@
     padding-bottom: 2rem;
 }
 
+.game-over-container{
+    position: relative;
+    width: 285px;
+    height:165px;
+    z-index: +1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 50px;
+}
+
+.game-over-card{
+    width: 285px;
+    height:165px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--white);
+    border-radius: 20px;
+    border: 3px solid var(--black);
+    box-shadow: 0px 10px var(--black);
+}
+
+.game-over-btn{
+    color: var(--white);
+	font-size: var(--font-size-body);
+	font-weight: 600;
+	background-color: var(--dark-purple);
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    border-radius: 20px;
+    border: 0;
+    height: 39px;
+	width: 130px;
+}
+
+.game-over-btn:hover{
+	background-color: var(--red);
+	transition: 200ms;
+	cursor: pointer;
+}
+
 .heading-xs{
     font-size: 16px;
 }

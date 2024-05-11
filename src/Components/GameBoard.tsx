@@ -35,14 +35,6 @@ export const GameBoard = () => {
 
 				const result = checkForWin(newBoardState);
 				if (result.winner) {
-					console.log(result.winner + " has won the game!");
-
-					/* 
-					TODO Highlight the winning cells in the UI, using result.winningCells
-					e.g., pass winningCells to the game board component to render them differently 
-					*/
-					console.log(result.winningCells);
-
 					const newPlayerScores = gameState.playerScores;
 					newPlayerScores[gameState.currPlayer - 1]++;
 
@@ -59,7 +51,7 @@ export const GameBoard = () => {
 
 					dispatch({
 						type: SET_WINNING_CELLS,
-						payload: result.winningCells
+						payload: result.winningCells,
 					});
 
 					dispatch({
@@ -89,6 +81,7 @@ export const GameBoard = () => {
 
 	const handleHoverEnter = (colIndex: number) => {
 		setHoveredCol(colIndex);
+		if (runningState !== RunningState.RUNNING) {return;}
 		const validMove = moveList.find((move) => move.col === colIndex && move.color === CellColor.NONE);
 		if (validMove) {
 			const newBoardState = gameState.boardState.map((col) => col.slice()); // Clone the board state
@@ -112,7 +105,7 @@ export const GameBoard = () => {
 
 	const handleHoverExit = (colIndex: number) => {
 		setHoveredCol(colIndex);
-
+		if (runningState !== RunningState.RUNNING) {return;}
 		const validMove = moveList.find((move) => move.col === colIndex && move.color === CellColor.NONE);
 		if (validMove) {
 			const newBoardState = gameState.boardState.map((col) => col.slice()); // Clone the board state
