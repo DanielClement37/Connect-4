@@ -7,7 +7,11 @@ import { CellColor, Player, RunningState } from "../Types/Enums";
 import { GAME_OVER, MAKE_MOVE, PAUSE, SET_HOVERED_COLUMN, SET_WINNING_CELLS } from "../GlobalState/Actions/actiontypes";
 import { checkForWin } from "../Helpers/GameMethods";
 
-export const GameBoard = () => {
+export interface GameBoardProps{
+	handleMove: (colIndex:number)=> void;
+}
+
+export const GameBoard = ({handleMove}:GameBoardProps) => {
 	const { state, dispatch } = useContext(AppContext);
 	const { gameState, moveList, runningState, winningCells } = state;
 
@@ -18,65 +22,6 @@ export const GameBoard = () => {
 
 	const isWinningCell = (row: number, col: number) => {
 		return winningCells.some((cell) => cell.row === row && cell.col === col);
-	};
-
-	const handleMove = (colIndex: number) => {
-		if (runningState !== RunningState.RUNNING) return;
-
-		// Find if the move is within the possible moves
-		const validMove = moveList.find((move) => move.col === colIndex && move.color === CellColor.NONE);
-
-		if (validMove) {
-			const newBoardState = gameState.boardState.map((col) => col.slice()); // Clone the board state
-
-			if (newBoardState[colIndex][validMove.row].color === CellColor.NONE) {
-				newBoardState[colIndex][validMove.row].color = gameState.currPlayer as unknown as CellColor; // Set the player's color
-				newBoardState[colIndex][validMove.row].isHovered = false;
-
-				const result = checkForWin(newBoardState);
-				if (result.winner) {
-					const newPlayerScores = gameState.playerScores;
-					newPlayerScores[gameState.currPlayer - 1]++;
-
-					dispatch({
-						type: GAME_OVER,
-						payload: {
-							boardState: newBoardState,
-							currPlayer: gameState.currPlayer,
-							turnCount: gameState.turnCount,
-							playerScores: newPlayerScores,
-							gameWinner: result.winner,
-						},
-					});
-
-					dispatch({
-						type: SET_WINNING_CELLS,
-						payload: result.winningCells,
-					});
-
-					dispatch({
-						type: PAUSE,
-						payload: RunningState.GAME_OVER,
-					});
-					return;
-				}
-			}
-
-			// Update game state after the move
-			const newTurnCount = gameState.turnCount + 1;
-			const newCurrPlayer = gameState.currPlayer === Player.RED ? Player.YELLOW : Player.RED;
-
-			dispatch({
-				type: MAKE_MOVE,
-				payload: {
-					boardState: newBoardState,
-					currPlayer: newCurrPlayer,
-					turnCount: newTurnCount,
-					playerScores: gameState.playerScores,
-					gameWinner: gameState.gameWinner,
-				},
-			});
-		}
 	};
 
 	const handleHoverEnter = (colIndex: number) => {
