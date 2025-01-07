@@ -4,8 +4,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { classNames } from "../Utils/ClassNames";
 import { CellColor, Player, RunningState } from "../Types/Enums";
-import { GAME_OVER, MAKE_MOVE, PAUSE, SET_HOVERED_COLUMN, SET_WINNING_CELLS } from "../GlobalState/Actions/actiontypes";
-import { checkForWin } from "../Helpers/GameMethods";
+import { SET_HOVERED_COLUMN } from "../GlobalState/Actions/actiontypes";
 
 export interface GameBoardProps{
 	handleMove: (colIndex:number)=> void;

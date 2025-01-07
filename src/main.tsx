@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// tslint:enable:no-unused-variable
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,19 +9,21 @@ import { Game } from "./Pages/Game";
 import "./index.css";
 import { AppContextProvider } from "./GlobalState/Context/AppContext";
 
+
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: "/Connect-4",
 		element: <MainMenu />,
 	},
 	{
-		path: "/rules",
+		path: "/Connect-4/rules",
 		element: <Rules />,
 	},
 	{
-		path: "/game",
+		path: "/Connect-4/game",
 		element: <Game />,
 	},
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

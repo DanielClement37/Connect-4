@@ -19,7 +19,7 @@ export const Rules = () => {
 					<li><p>The starter of the previous game goes second on the next game.</p></li>
 				</ol>
 				<div className="return-container center-container">
-					<Link to={`/`} className="link return-btn">
+					<Link to={`/Connect-4`} className="link return-btn">
 						<div className="return-img" />
 					</Link>
 				</div>

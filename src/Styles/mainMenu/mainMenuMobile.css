@@ -9,8 +9,8 @@
         justify-content: center;
         background-color: var(--purple);
     }
-    
-    .menu-card{
+
+    .menu-card {
         width: 100%;
         background-color: var(--purple);
         display: flex;
@@ -19,24 +19,24 @@
         flex-direction: column;
         border: none;
         box-shadow: none;
-        gap:20px;
+        gap: 20px;
     }
 
-    .menu-img{
+    .menu-img {
         padding-bottom: 80px;
     }
-    
-    .link:link, .link:visited{
+
+    .link:link, .link:visited {
         text-decoration: none;
         color: var(--black);
     }
-    
+
     .heading-m {
         color: var(--black);
         font-size: 24px;
     }
-    
-    .menu-btn{
+
+    .menu-btn {
         width: 335px;
         height: 72px;
         display: flex;
@@ -47,18 +47,19 @@
         border: 3px solid var(--black);
         box-shadow: 0px 10px var(--black);
     }
-    
-    .menu-btn:hover{
+
+    .menu-btn:hover {
         border: 3px solid var(--dark-purple);
         box-shadow: 0px 10px var(--dark-purple);
         transition: 200ms;
     }
-    
+
     .pvp {
         background-color: var(--yellow);
     }
-    
+
     .rules {
         background-color: var(--white);
     }
+}
     

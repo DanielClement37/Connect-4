@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { Player, RunningState } from "../Types/Enums";
 import "../Styles/gameStyles/gameStatusDesk.css";
