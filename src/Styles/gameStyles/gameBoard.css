@@ -1,0 +1,122 @@
+.board-container {
+    position: relative;
+    max-width: 632px;
+    height: 594px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin: 0 1rem;
+    z-index: 1;
+}
+
+.board-container::before,
+.board-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    bottom: 0px;
+    background-repeat: no-repeat;
+}
+
+.board-container::before {
+    background-image: url("../../assets/images/board-layer-black-large.svg");
+}
+
+.board-container::after {
+    background-image: url("../../assets/images/board-layer-white-large.svg");
+    bottom: 10px;
+    pointer-events: none;
+}
+
+.marker-container {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    z-index: +2;
+    top: -36px;
+}
+
+.marker-red {
+    width: 38px;
+    height: 36px;
+    background-image: url("../../assets/images/marker-red.svg");
+}
+
+.marker-yellow {
+    width: 38px;
+    height: 36px;
+    background-image: url("../../assets/images/marker-yellow.svg");
+}
+
+.board-grid {
+    position: relative;
+    top: -36px;
+    width: 633px;
+    height: 584px;
+    display: flex;
+    padding-inline: 1.4%;
+}
+
+.board-col {
+    position: relative;
+    flex: 1;
+    padding-top: 1.7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .15rem;
+}
+
+.board-cell {
+    position: relative;
+    height: 15.1%;
+    width: 100%;
+    margin-inline: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.red-cell {
+    background-image: url("../../assets/images/counter-red-large.svg");
+}
+
+.yellow-cell {
+    background-image: url("../../assets/images/counter-yellow-large.svg");
+}
+
+.hovered-red {
+    background-image: url("../../assets/images/counter-red-large.svg");
+    opacity: 0.6;
+    transition: left 0.1s ease
+}
+
+.hovered-yellow {
+    background-image: url("../../assets/images/counter-yellow-large.svg");
+    opacity: 0.6;
+    transition: left 0.1s ease
+}
+
+.winning-cell::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%; /* Adjust size based on your design */
+    height: 50%; /* Adjust size based on your design */
+    border-radius: 50%;
+    border: 10px solid white; /* Creates a hollow effect */
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+
+.game-footer {
+    position: absolute;
+    top: 0;
+    left: calc((100vw - 100%) / -2);
+    width: 100vw;
+    bottom: -40vh;
+    border-radius: 60px 60px 0 0;
+    background-color: var(--dark-purple);
+}

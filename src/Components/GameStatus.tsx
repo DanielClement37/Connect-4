@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { Player, RunningState } from "../Types/Enums";
-import "../Styles/gameStyles/gameStatusDesk.css";
+import "../Styles/gameStyles/gameStatus.css";
 import { classNames } from "../Utils/ClassNames";
 
 export interface GameStatusProps{

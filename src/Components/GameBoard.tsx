@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import "../Styles/gameStyles/gameBoardDesk.css";
+import "../Styles/gameStyles/gameBoard.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../GlobalState/Context/AppContext";
 import { classNames } from "../Utils/ClassNames";

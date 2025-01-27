@@ -48,7 +48,7 @@
 }
 
 html {
-	font-size: 10px;
+	font-size: 16px;
 }
 
 #root{
@@ -75,4 +75,12 @@ h3,
 h4 {
 	font-family: "Space Grotesk", sans-serif;
 	font-weight: bold;
+}
+
+.heading-s{
+	font-size: var(--font-size-heading-s);
+}
+
+.heading-l{
+	font-size: var(--font-size-heading-l);
 }
