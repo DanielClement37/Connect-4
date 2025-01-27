@@ -10,7 +10,7 @@
 }
 
 .game-header {
-    width: 100%;
+    width: 90%;
     padding: 1rem 0;
     display: flex;
     align-items: center;
@@ -67,7 +67,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     gap: 12px;
-    width: 90%;
+    width: 85%;
 }
 
 
@@ -96,6 +96,15 @@
 
 .yellow {
     background-color: var(--yellow);
+}
+
+@media (min-width: 768px) {
+    .game-header{
+        width: 80%;
+    }
+    .info-row{
+        width: 75%;
+    }
 }
 
 /* -----------------------------

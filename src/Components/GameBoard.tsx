@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import "../Styles/gameStyles/gameBoard.css";
-import { useContext, useState } from "react";
-import { AppContext } from "../GlobalState/Context/AppContext";
-import { classNames } from "../Utils/ClassNames";
-import { CellColor, Player, RunningState } from "../Types/Enums";
-import { SET_HOVERED_COLUMN } from "../GlobalState/Actions/actiontypes";
+import {useContext, useState} from "react";
+import {AppContext} from "../GlobalState/Context/AppContext";
+import {classNames} from "../Utils/ClassNames";
+import {CellColor, Player, RunningState} from "../Types/Enums";
+import {SET_HOVERED_COLUMN} from "../GlobalState/Actions/actiontypes";
+import {useMediaQuery} from "react-responsive";
 
 export interface GameBoardProps{
 	handleMove: (colIndex:number)=> void;
@@ -15,8 +16,12 @@ export const GameBoard = ({handleMove}:GameBoardProps) => {
 	const { gameState, moveList, runningState, winningCells } = state;
 
 	const [hoveredCol, setHoveredCol] = useState<number>(0);
-	const columnWidth = 632 / 7; // Calculate the width of each column
-	const markerWidth = 38; // The width of the marker
+	const isMobile = useMediaQuery({ maxWidth: 767 });
+	const showMarker = useMediaQuery({minWidth: 1025});
+
+	// Calculate board/marker widths based on breakpoints
+	const columnWidth = isMobile ? 335 / 7 : 632 / 7;
+	const markerWidth = isMobile ? 0 : 38;
 	const adjustment = (columnWidth - markerWidth) / 2;
 
 	const isWinningCell = (row: number, col: number) => {
@@ -73,6 +78,7 @@ export const GameBoard = ({handleMove}:GameBoardProps) => {
 
 	return (
 		<div className="board-container">
+			{showMarker && (
 			<div className="marker-container">
 				<div
 					className={classNames(gameState.currPlayer === Player.RED ? "marker-red" : "marker-yellow")}
@@ -83,6 +89,7 @@ export const GameBoard = ({handleMove}:GameBoardProps) => {
 					}}
 				/>
 			</div>
+			)}
 			<div className="board-grid">
 				{gameState.boardState.map((col, colIndex) => (
 					<div
