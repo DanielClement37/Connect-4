@@ -24,6 +24,7 @@ export const Game = () => {
     const {state, dispatch} = useContext(AppContext);
     const {gameState, runningState, moveList} = state;
     const [counter, setCounter] = useState(30);
+    const [lastPlaced, setLastPlaced] = useState<{ col: number; row: number } | null>(null);
     const isDesktop = useMediaQuery({
         query: '(min-width: 1025px)'
     })
@@ -65,6 +66,8 @@ export const Game = () => {
             if (newBoardState[colIndex][validMove.row].color === CellColor.NONE) {
                 newBoardState[colIndex][validMove.row].color = gameState.currPlayer as unknown as CellColor; // Set the player's color
                 newBoardState[colIndex][validMove.row].isHovered = false;
+
+                setLastPlaced({col: colIndex, row: validMove.row});
 
                 const result = checkForWin(newBoardState);
                 if (result.winner) {
@@ -166,7 +169,7 @@ export const Game = () => {
                         <div className="red-info">
                             <PlayerInfo playerColor={Player.RED}/>
                         </div>
-                            <GameBoard handleMove={handleMove}/>
+                        <GameBoard handleMove={handleMove} lastPlaced={lastPlaced}/>
                         <div className="yellow-info">
                             <PlayerInfo playerColor={Player.YELLOW}/>
                         </div>
@@ -181,7 +184,7 @@ export const Game = () => {
                             <PlayerInfo playerColor={Player.YELLOW}/>
                         </div>
                     </div>
-                        <GameBoard handleMove={handleMove}/>
+                    <GameBoard handleMove={handleMove} lastPlaced={lastPlaced}/>
                 </div>)
             }
             <GameStatus handleRestart={handleRestart} counter={counter}/>
