@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import "../Styles/ruleStyles/rulesDesk.css";
-import "../Styles/ruleStyles/rulesMobile.css";
+import "../Styles/ruleStyles/rules.css";
 
 export const Rules = () => {
 	return (

@@ -19,6 +19,8 @@ import {
 } from "../GlobalState/Actions/actiontypes";
 import {classNames} from "../Utils/ClassNames";
 import {useMediaQuery} from "react-responsive";
+import PlayerOne from "../assets/images/player-one.svg";
+import CPU from "../assets/images/cpu.svg"
 
 export const GameVsCPU = () => {
     const {state, dispatch} = useContext(AppContext);
@@ -167,21 +169,29 @@ export const GameVsCPU = () => {
             {isDesktop ? (
                     <div className="game-body">
                         <div className="red-info">
-                            <PlayerInfo playerColor={Player.RED}/>
+                            <PlayerInfo playerText={"YOU"} playerImg={PlayerOne}
+                                        playerScore={gameState.playerScores[Player.RED -1]}
+                                        className={"left-player-img"}/>
                         </div>
                         <GameBoard handleMove={handleMove} lastPlaced={lastPlaced}/>
                         <div className="yellow-info">
-                            <PlayerInfo playerColor={Player.YELLOW}/>
+                            <PlayerInfo playerText={"CPU"} playerImg={CPU}
+                                        playerScore={gameState.playerScores[Player.YELLOW -1]}
+                                        className={"right-player-img"}/>
                         </div>
                     </div>
                 ) :
                 (<div className="game-body">
                     <div className="info-row">
                         <div className="red-info">
-                            <PlayerInfo playerColor={Player.RED}/>
+                            <PlayerInfo playerText={"YOU"} playerImg={PlayerOne}
+                                        playerScore={gameState.playerScores[Player.RED -1]}
+                                        className={"left-player-img"}/>
                         </div>
                         <div className="yellow-info">
-                            <PlayerInfo playerColor={Player.YELLOW}/>
+                            <PlayerInfo playerText={"CPU"} playerImg={CPU}
+                                        playerScore={gameState.playerScores[Player.YELLOW -1]}
+                                        className={"right-player-img"}/>
                         </div>
                     </div>
                     <GameBoard handleMove={handleMove} lastPlaced={lastPlaced}/>
