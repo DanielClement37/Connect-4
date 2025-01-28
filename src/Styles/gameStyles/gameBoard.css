@@ -125,6 +125,15 @@
     .board-container {
         padding: 3%;
     }
+
+    .board-grid {
+        left: -24px;
+        top:-30px;
+    }
+
+    .board-col {
+        padding-top: 3.5%;
+    }
 }
 
 @media (max-width: 767px) {

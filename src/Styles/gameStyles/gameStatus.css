@@ -85,3 +85,9 @@
 .black-text{
     color: var(--black)
 }
+
+@media (max-width: 767px) {
+    .game-over-container{
+        bottom:30px;
+    }
+}
