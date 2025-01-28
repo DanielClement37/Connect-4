@@ -83,7 +83,6 @@ h4 {
 	font-family: "Space Grotesk", sans-serif;
 	font-weight: bold;
 }
-
 .heading-s{
 	font-size: var(--font-size-heading-s);
 }
@@ -91,3 +90,8 @@ h4 {
 .heading-l{
 	font-size: var(--font-size-heading-l);
 }
+.heading-m {
+	color: var(--black);
+	font-size: 24px;
+}
+

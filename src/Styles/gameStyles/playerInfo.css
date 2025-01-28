@@ -40,12 +40,12 @@
     height: 59px;
 }
 
-.red-player-img {
+.left-player-img {
     left: 0;
     transform: translate(-50%, -50%);
 }
 
-.yellow-player-img {
+.right-player-img {
     right: 0;
     transform: translate(50%, -50%);
 }
@@ -96,6 +96,7 @@
 @media (min-width: 1025px) {
     .player-info-card {
         height: 10rem;
+        min-width: 125px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -108,8 +109,8 @@
         height: 59px;
     }
 
-    .red-player-img,
-    .yellow-player-img {
+    .left-player-img,
+    .right-player-img {
         top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
