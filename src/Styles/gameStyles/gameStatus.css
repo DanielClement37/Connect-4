@@ -55,7 +55,7 @@
     background-color: var(--white);
     border-radius: 20px;
     border: 3px solid var(--black);
-    box-shadow: 0px 10px var(--black);
+    box-shadow: 0 10px var(--black);
 }
 
 .game-over-btn{
