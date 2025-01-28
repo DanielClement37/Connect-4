@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainMenu } from "./Pages/MainMenu";
 import { Rules } from "./Pages/Rules";
 import { Game } from "./Pages/Game";
+import { GameVsCPU } from "./Pages/GameVsCPU";
 import "./index.css";
 import { AppContextProvider } from "./GlobalState/Context/AppContext";
 
@@ -23,7 +24,10 @@ const router = createBrowserRouter([
 		path: "/Connect-4/game",
 		element: <Game />,
 	},
-
+	{
+		path: "/Connect-4/game-vs-cpu",
+		element: <GameVsCPU />,
+	}
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
