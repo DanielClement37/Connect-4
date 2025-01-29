@@ -1,16 +1,22 @@
 import { CellColor, Player } from "../Types/Enums";
 import { GameState, Cell } from "../Types/GameTypes";
 
+/**
+ * Initializes a new GameState with an empty board and default values.
+ */
 export const InitGameState = (): GameState => {
-	return {
+    return {
         boardState: ResetBoard(),
         currPlayer: Player.RED,
         turnCount: 1,
-        playerScores: [0,0],
-        gameWinner: undefined
+        playerScores: [0, 0],
+        gameWinner: undefined,
     };
 };
 
+/**
+ * Creates and returns a new 7x6 board filled with empty cells.
+ */
 export const ResetBoard = (): Cell[][] => {
     const board: Cell[][] = [];
     for (let col = 0; col < 7; col++) {
@@ -20,7 +26,7 @@ export const ResetBoard = (): Cell[][] => {
                 col,
                 row,
                 color: CellColor.NONE,
-                isHovered: false
+                isHovered: false,
             };
             boardCol.push(cell);
         }
@@ -29,35 +35,48 @@ export const ResetBoard = (): Cell[][] => {
     return board;
 };
 
+/**
+ * Determines all possible moves by finding the lowest empty cell in each column.
+ * Returns an array of valid Cell positions where a piece can be placed.
+ */
 export const getPossibleMoves = (boardState: Cell[][]): Cell[] => {
     const moves: Cell[] = [];
     for (let col = 0; col < 7; col++) {
         for (let row = 5; row >= 0; row--) {
             if (boardState[col][row].color === CellColor.NONE) {
-                moves.push({ row, col, color: CellColor.NONE , isHovered: false});
-                break; // Stop after finding the first empty cell in this column
+                moves.push({ row, col, color: CellColor.NONE, isHovered: false });
+                break;
             }
         }
     }
     return moves;
 };
 
-export const checkForWin = (boardState: Cell[][]): { winner: Player | undefined, winningCells: {row: number, col: number}[] | undefined } => {
+/**
+ * Checks the board for a winning connect-four pattern.
+ * Returns an object containing the winning Player (if any) and the cells that form the win.
+ */
+export const checkForWin = (
+    boardState: Cell[][]
+): { winner: Player | undefined; winningCells: { row: number; col: number }[] | undefined } => {
     const rows = boardState[0].length;
     const cols = boardState.length;
 
-    // Helper to check within board limits
-    const isValidCell = (row: number, col: number) => row >= 0 && row < rows && col >= 0 && col < cols;
+    const isValidCell = (row: number, col: number) =>
+        row >= 0 && row < rows && col >= 0 && col < cols;
 
-    // Check all directions from a given starting cell
-    const checkDirection = (startRow: number, startCol: number, deltaRow: number, deltaCol: number) => {
+    const checkDirection = (
+        startRow: number,
+        startCol: number,
+        deltaRow: number,
+        deltaCol: number
+    ) => {
         let count = 1;
         const color = boardState[startCol][startRow].color;
         if (color === CellColor.NONE) return undefined;
 
         const winningCells = [{ row: startRow, col: startCol }];
 
-        // Check in the positive direction
         let r = startRow + deltaRow;
         let c = startCol + deltaCol;
         while (isValidCell(r, c) && boardState[c][r].color === color) {
@@ -68,11 +87,10 @@ export const checkForWin = (boardState: Cell[][]): { winner: Player | undefined,
             c += deltaCol;
         }
 
-        // Check in the negative direction
         r = startRow - deltaRow;
         c = startCol - deltaCol;
         while (isValidCell(r, c) && boardState[c][r].color === color) {
-            winningCells.unshift({ row: r, col: c }); // Prepend to maintain order
+            winningCells.unshift({ row: r, col: c });
             count++;
             if (count === 4) return { color, cells: winningCells };
             r -= deltaRow;
@@ -82,15 +100,13 @@ export const checkForWin = (boardState: Cell[][]): { winner: Player | undefined,
         return undefined;
     };
 
-    // Check all cells for possible winning combinations
     for (let col = 0; col < cols; col++) {
         for (let row = 0; row < rows; row++) {
-            // Check vertical, horizontal, and both diagonals
             const directions = [
-                { dr: 1, dc: 0 },  // Vertical
-                { dr: 0, dc: 1 },  // Horizontal
-                { dr: 1, dc: 1 },  // Diagonal ascending
-                { dr: 1, dc: -1 }  // Diagonal descending
+                { dr: 1, dc: 0 },
+                { dr: 0, dc: 1 },
+                { dr: 1, dc: 1 },
+                { dr: 1, dc: -1 },
             ];
 
             for (const { dr, dc } of directions) {
@@ -98,7 +114,7 @@ export const checkForWin = (boardState: Cell[][]): { winner: Player | undefined,
                 if (result) {
                     return {
                         winner: result.color === CellColor.RED ? Player.RED : Player.YELLOW,
-                        winningCells: result.cells
+                        winningCells: result.cells,
                     };
                 }
             }
@@ -108,29 +124,20 @@ export const checkForWin = (boardState: Cell[][]): { winner: Player | undefined,
     return { winner: undefined, winningCells: undefined };
 };
 
-function scoreWindow(
-    redCount: number,
-    yellowCount: number,
-    aiPlayer: Player
-): number {
-    // If both players occupy the window, no one can connect 4 here
+/**
+ * Scores a 4-cell window based on how many pieces belong to the AI or the opponent.
+ * Higher scores favor the AI; negative scores favor the opponent.
+ */
+function scoreWindow(redCount: number, yellowCount: number, aiPlayer: Player): number {
     if (redCount > 0 && yellowCount > 0) {
         return 0;
     }
 
-    // We’ll use a simple weighting
-    // - 4 in a row = ±10000
-    // - 3 in a row = ±100
-    // - 2 in a row = ±10
-    // - 1 in a row = ±1
-
-    // Decide which color is “mine” vs “opponent”
     const myCount = aiPlayer === Player.RED ? redCount : yellowCount;
     const oppCount = aiPlayer === Player.RED ? yellowCount : redCount;
 
     let score = 0;
 
-    // If I occupy x cells, good for me:
     switch (myCount) {
         case 4:
             score += 10000;
@@ -146,7 +153,6 @@ function scoreWindow(
             break;
     }
 
-    // If the opponent occupies x cells, that’s bad for me:
     switch (oppCount) {
         case 4:
             score -= 10000;
@@ -165,16 +171,14 @@ function scoreWindow(
     return score;
 }
 
-// 2) The main evaluation function
-export function evaluateBoard(
-    boardState: Cell[][],
-    aiPlayer: Player
-): number {
+/*
+* Evaluates the entire board state for the AI player, summing scores from all 4-cell windows.
+*/
+export function evaluateBoard(boardState: Cell[][], aiPlayer: Player): number {
     let totalScore = 0;
-    const maxCols = 7; // typical Connect4 width
-    const maxRows = 6; // typical Connect4 height
+    const maxCols = 7;
+    const maxRows = 6;
 
-    // --- HORIZONTAL windows ---
     for (let col = 0; col <= maxCols - 4; col++) {
         for (let row = 0; row < maxRows; row++) {
             const windowCells = [
@@ -183,7 +187,6 @@ export function evaluateBoard(
                 boardState[col + 2][row],
                 boardState[col + 3][row],
             ];
-
             let redCount = 0;
             let yellowCount = 0;
             for (const cell of windowCells) {
@@ -194,7 +197,6 @@ export function evaluateBoard(
         }
     }
 
-    // --- VERTICAL windows ---
     for (let col = 0; col < maxCols; col++) {
         for (let row = 0; row <= maxRows - 4; row++) {
             const windowCells = [
@@ -203,7 +205,6 @@ export function evaluateBoard(
                 boardState[col][row + 2],
                 boardState[col][row + 3],
             ];
-
             let redCount = 0;
             let yellowCount = 0;
             for (const cell of windowCells) {
@@ -214,7 +215,6 @@ export function evaluateBoard(
         }
     }
 
-    // --- DIAGONAL (down-right, ↘) ---
     for (let col = 0; col <= maxCols - 4; col++) {
         for (let row = 0; row <= maxRows - 4; row++) {
             const windowCells = [
@@ -223,7 +223,6 @@ export function evaluateBoard(
                 boardState[col + 2][row + 2],
                 boardState[col + 3][row + 3],
             ];
-
             let redCount = 0;
             let yellowCount = 0;
             for (const cell of windowCells) {
@@ -234,7 +233,6 @@ export function evaluateBoard(
         }
     }
 
-    // --- DIAGONAL (up-right, ↗) ---
     for (let col = 0; col <= maxCols - 4; col++) {
         for (let row = 3; row < maxRows; row++) {
             const windowCells = [
@@ -243,7 +241,6 @@ export function evaluateBoard(
                 boardState[col + 2][row - 2],
                 boardState[col + 3][row - 3],
             ];
-
             let redCount = 0;
             let yellowCount = 0;
             for (const cell of windowCells) {
@@ -257,26 +254,25 @@ export function evaluateBoard(
     return totalScore;
 }
 
-/** Create a deep clone of the 2D Cell array. */
+/**
+ * Creates a deep clone of the 2D Cell array.
+ */
 export function cloneBoard(boardState: Cell[][]): Cell[][] {
-    return boardState.map((col) =>
-        col.map((cell) => ({ ...cell }))
-    );
+    return boardState.map((col) => col.map((cell) => ({ ...cell })));
 }
 
 /**
- * Place a piece in the given column for the given player.
- * Returns `true` if successful, or `false` if column is full.
+ * Places a piece in the given column for the given player.
+ * Returns `true` if successful, or `false` if the column is full.
  */
 export function placePiece(boardState: Cell[][], colIndex: number, player: Player): boolean {
-    // Start from the bottom row of that column
     for (let row = 5; row >= 0; row--) {
         if (boardState[colIndex][row].color === CellColor.NONE) {
             boardState[colIndex][row].color = player as unknown as CellColor;
             return true;
         }
     }
-    return false; // Column is full
+    return false;
 }
 
 /**
@@ -285,4 +281,3 @@ export function placePiece(boardState: Cell[][], colIndex: number, player: Playe
 export function getOpponent(player: Player): Player {
     return player === Player.RED ? Player.YELLOW : Player.RED;
 }
-

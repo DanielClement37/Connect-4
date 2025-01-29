@@ -23,30 +23,23 @@ export function minimax(
     isMax: boolean,
     aiPlayer: Player
 ): number {
-    // 1. Terminal or depth check
     const result = checkForWin(boardState);
     if (result.winner !== undefined) {
-        // If the AI just won, return a large positive. If the opponent won, large negative.
         return result.winner === aiPlayer ? POS_INFINITY : NEG_INFINITY;
     }
 
     const possibleMoves = getPossibleMoves(boardState);
     if (possibleMoves.length === 0) {
-        // Board is full or no moves => draw => 0
         return 0;
     }
 
     if (depth === 0) {
-        // Return the evaluated score of this board for the AI
         return evaluateBoard(boardState, aiPlayer);
     }
 
-    // 2. Recur as Maximizing or Minimizing
     if (isMax) {
         let bestScore = NEG_INFINITY;
-        // The maximizer is the AI
         for (const move of possibleMoves) {
-            // Clone board, place AI piece
             const clonedBoard = cloneBoard(boardState);
             placePiece(clonedBoard, move.col, aiPlayer);
 
@@ -62,14 +55,12 @@ export function minimax(
             bestScore = Math.max(bestScore, score);
             alpha = Math.max(alpha, bestScore);
 
-            // Alpha-Beta Pruning
             if (beta <= alpha) {
                 break;
             }
         }
         return bestScore;
     } else {
-        // Minimizing for the opponent
         let bestScore = POS_INFINITY;
         const opponent = getOpponent(aiPlayer);
         for (const move of possibleMoves) {
@@ -88,7 +79,6 @@ export function minimax(
             bestScore = Math.min(bestScore, score);
             beta = Math.min(beta, bestScore);
 
-            // Alpha-Beta Pruning
             if (beta <= alpha) {
                 break;
             }
@@ -110,15 +100,13 @@ export function findBestMove(boardState: Cell[][], depth: number, aiPlayer: Play
 
     const possibleMoves = getPossibleMoves(boardState);
     if (possibleMoves.length === 0) {
-        return bestColumn; // No moves, maybe -1 or 0 as a "pass" or "invalid"
+        return bestColumn;
     }
 
     for (const move of possibleMoves) {
-        // 1) Clone & place the AI piece
         const clonedBoard = cloneBoard(boardState);
         placePiece(clonedBoard, move.col, aiPlayer);
 
-        // 2) Score the resulting board with minimax (opponent's turn next => isMax = false)
         const score = minimax(
             clonedBoard,
             depth - 1,
@@ -128,7 +116,6 @@ export function findBestMove(boardState: Cell[][], depth: number, aiPlayer: Play
             aiPlayer
         );
 
-        // 3) If better than current best, update
         if (score > bestScore) {
             bestScore = score;
             bestColumn = move.col;
